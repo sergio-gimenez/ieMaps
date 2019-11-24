@@ -1,0 +1,5 @@
+Qualitat*
+
+/app/__pycache__/
+*.pyc
+
