@@ -9,8 +9,8 @@ from constants import Constants
 def getstation(lat_start, lon_start, lat_end, lon_end):
     stations_url = 'https://opendata-ajuntament.barcelona.cat/resources/aspb/Qualitat_Aire_Estacions.csv'
 
-    wget.download(stations_url, Constants.TMP_DIR)
-    stations = pd.read_csv(stations_path)
+    filename = wget.download(stations_url, Constants.TMP_DIR)
+    stations = pd.read_csv(filename)
     stations = stations.drop_duplicates('Longitud')
 
     # define the WGS84 ellipsoid
