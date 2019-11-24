@@ -1,5 +1,6 @@
 
 class Constants:
+    TMP_DIR = os.path.dirname(os.path.abspath(__file__)) + "/Datasets/tmp"
     driving = "driving"
     walking = "walking"
     bike = "bicycling"
