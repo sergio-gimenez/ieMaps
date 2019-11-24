@@ -39,11 +39,14 @@ def get_airquality(lat_start, lon_start, lat_end, lon_end):
 
     # Download air quality data and read index table
     closest_station = getstation(lat_start, lon_start, lat_end, lon_end)
+
+    # Index to determine air quality (check README)
+    quality_index = pd.read_csv("./Datasets/quality_index.csv")
+
+    # Get real time air state
     air_quality_url = 'https://opendata-ajuntament.barcelona.cat/resources/aspb/Qualitat_Aire_Detall.csv'
-    quality_index_path = "./Datasets/quality_index.csv"
-    air_quality_path = wget.download(air_quality_url)
-    quality_index = pd.read_csv(quality_index_path)
-    air_quality = pd.read_csv(air_quality_path)
+    air_quality_file = wget.download(air_quality_url, Constants.TMP_DIR)
+    air_quality = pd.read_csv(air_quality_file)
 
     air_quality = air_quality.loc[air_quality['ESTACIO'] == closest_station]
     air_quality = air_quality.loc[air_quality['DIA'] == 11]
@@ -54,9 +57,9 @@ def get_airquality(lat_start, lon_start, lat_end, lon_end):
     CO = air_quality.loc[air_quality['CODI_CONTAMINANT'] == 6]['H23']
     PM10 = air_quality.loc[air_quality['CODI_CONTAMINANT'] == 10]['H23']
 
+    # Parametritzacio de la qualitat de l'aire --> índex de polució
     counter = 5
     try:
-
         if int(SO2) < int(quality_index.loc[quality_index['pollutants'] == 'SO2']['good_max']):
             SO2_i = 1
         elif int(SO2) < int(quality_index.loc[quality_index['pollutants'] == 'SO2']['medium_max']):
