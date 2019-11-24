@@ -2,22 +2,29 @@ import googlemaps
 from datetime import datetime, timedelta
 import polyline
 import json
+import shutil
+
 from constants import Constants
+from tools.airquality import get_airquality
+from tools.get_weather import get_weather
+from tools.footprint_calculation import get_footprint
+from tools.closestParkingSpot import getClosestBikeParking, getClosestCarParking
+from tools.closestStation import getClosestSation
+from tools.getStationsNoAdapted import isLineAdapted
+import os
 
-from airquality import get_airquality    ##Ben files
-from get_weather import get_weather
-from footprint_calculation import get_footprint
-
-from closestParkingSpot import getClosestBikeParking, getClosestCarParking #Xex files
-from closestStation import getClosestSation
-from getStationsNoAdapted import isLineAdapted
-
-#Bru's key
+# Bru's key
 #gmaps = googlemaps.Client(key='AIzaSyD9R2jg0AERETo2MTHyEHqQTLS06hc7sM0')
-#Xexa's key
+# Xexa's key
 gmaps = googlemaps.Client(key='AIzaSyA85AZn35eZa6DwMyLhXQfSxM8nP3HB-nA')
 
+
 def ieMaps(json_i):
+
+    # Create tmp directory for temporary datasets
+
+    if not os.path.exists(Constants.TMP_DIR):
+        os.makedirs(Constants.TMP_DIR)
 
     # Get data from input JSON
     dis = json_i[0]['dis']
@@ -25,8 +32,8 @@ def ieMaps(json_i):
     taxi = json_i[0]['taxi']
     start_adress = json_i[0]['start_adress']
     end_adress = json_i[0]['end_adress']
-    date_of_search = datetime.strptime(json_i[0]['time_of_search'], 
-                                        "%Y-%m-%d %H:%M:%S")
+    date_of_search = datetime.strptime(json_i[0]['time_of_search'],
+                                       "%Y-%m-%d %H:%M:%S")
 
     transport_dict = {}
 
@@ -36,10 +43,10 @@ def ieMaps(json_i):
 
         # Request directions for selected mean of transport
         directions_result = gmaps.directions(start_adress,
-                                        end_adress,
-                                        mode=transportmode,
-                                        departure_time=date_of_search)
-        # Start-end locations                                                
+                                             end_adress,
+                                             mode=transportmode,
+                                             departure_time=date_of_search)
+        # Start-end locations
         start_location = gmaps.geocode(start_adress)
         end_location = gmaps.geocode(end_adress)
         start_lat = start_location[0]['geometry']['location']['lat']
@@ -59,10 +66,11 @@ def ieMaps(json_i):
 
         # Get footprint of the trip for the current mean of transport
         co2_trip, co2_trip_car, price, petrol_car_price = get_footprint(
-            start_lat, start_lon, end_lat, end_lon, transportmode, ev,taxi)
-        
+            start_lat, start_lon, end_lat, end_lon, transportmode, ev, taxi)
+
         # Air quality for the location
-        pollution_index = get_airquality(start_lat, start_lon, end_lat, end_lon)
+        pollution_index = get_airquality(
+            start_lat, start_lon, end_lat, end_lon)
 
         # Get temperature, precipitation percentage and precipitation intensity
         temp, p_percent, p_int = get_weather(end_lat, end_lon, ts_from, ts_to)
@@ -80,7 +88,7 @@ def ieMaps(json_i):
         params_dict['warnings'] = []
         params_dict['co2_trip'] = co2_trip
         params_dict['price'] = price
-        
+
         if (transportmode != Constants.driving):
             params_dict['co2_trip_car'] = co2_trip_car
             params_dict['petrol_car_price'] = petrol_car_price
@@ -92,22 +100,22 @@ def ieMaps(json_i):
 
         # Check that public transport stops are adapted for PwRM.
         isAdapted = True
-        if transportmode == Constants.public_transport and dis:            
+        if transportmode == Constants.public_transport and dis:
             for stp in directions_result[0]['legs'][0]['steps']:
-                if stp['travel_mode']== Constants.public_transport:
+                if stp['travel_mode'] == Constants.public_transport:
                     origin = stp['start_location']
                     final = stp['end_location']
-                    start_location = gmaps.reverse_geocode((origin['lat'], 
+                    start_location = gmaps.reverse_geocode((origin['lat'],
                                                             origin['lng']))
                     end_location = gmaps.reverse_geocode((origin['lat'],
-                                                         origin['lng']))
+                                                          origin['lng']))
                     isAdapted = isAdapted and isLineAdapted(
-                                                    start_location['place_id'],
-                                                    end_location['place_id'])
+                        start_location['place_id'],
+                        end_location['place_id'])
         # Populate warning for PwRM
         if isAdapted == False:
             params_dict['warnings'].append(
-            "There is one line of the Metro step that is not adapted for PwRM")
+                "There is one line of the Metro step that is not adapted for PwRM")
 
         # Get closest charging point for electric vehicles
         if transportmode == Constants.driving and ev:
@@ -129,5 +137,5 @@ def ieMaps(json_i):
     # Dump the dictionary data in json format
     jayson = json.dumps(transport_dict)
     print(jayson)
-    
+
     return jayson
