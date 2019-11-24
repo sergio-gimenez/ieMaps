@@ -3,14 +3,13 @@ from geographiclib.geodesic import Geodesic
 from geopy.distance import geodesic
 from datetime import date
 import wget
+from constants import Constants
 
 
 def getstation(lat_start, lon_start, lat_end, lon_end):
     stations_url = 'https://opendata-ajuntament.barcelona.cat/resources/aspb/Qualitat_Aire_Estacions.csv'
 
-    stations_path = "./Datasets/tmp/Qualitat_Aire_Estacions.csv"
-
-    wget.download(stations_url, stations_path)
+    wget.download(stations_url, Constants.TMP_DIR)
     stations = pd.read_csv(stations_path)
     stations = stations.drop_duplicates('Longitud')
 
