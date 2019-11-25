@@ -1,0 +1,9 @@
+version: "3"
+services:
+    app:
+        container_name: ieMaps_BE
+        build: 
+          context: ../
+          dockerfile: deployments/app/dockerfile
+        ports: 
+          - "5000:5000"
