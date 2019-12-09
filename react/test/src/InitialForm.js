@@ -13,11 +13,11 @@ import Button from '@material-ui/core/Button';
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [state, setState] = React.useState({
+    startAddress: '',
+    endAddress: '',
     taxi: false,
     dis: false,
     ev: false,
-    startAddress: '',
-    endAddress: '',
   });
 
   const handleChangeCheckBox = name => event => {
@@ -40,29 +40,54 @@ function InitialForm() {
 
   var url = "";
   for (var key in state) {
-    if (url != "") {
+    if (url !== "") {
       url += "&";
     }
     url += key + "=" + encodeURIComponent(state[key]);
   }
 
   const buildURL = () => {
-    // const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'localhost:3000', true);
+    // // const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
+    // // create a new XMLHttpRequest
+    // var xhr = new XMLHttpRequest();
 
-    //Send the proper header information along with the request
-    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    // // get a callback when the server responds
+    // // xhr.addEventListener('load', () => {
+    // //   // update the state of the component with the result here
+    // //   console.log(xhr.responseText)
+    // // })
+    // // open the request with the verb and the url
+    // xhr.open('POST', 'http://localhost:5000', true);
+    // // xhr.withCredentials=true;
+    // //xhr.setRequestHeader("Content-Length:" url.length)
+    // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
+    // xhr.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // xhr.setRequestHeader("Accept","*/*");
+    // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    // // send the request
+    // console.log(`?${url}&dayOfSearch=2019-12-10+23:00:00`);
+    // xhr.send(`"?${url}&dayOfSearch=2019-12-10+23:00:00"`);
 
-    xhr.onreadystatechange = function () { // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        // Request finished. Do processing here.
+    var request = require('request');
+
+    var dataString = 'startAddress=Edificio+B3+-+Campus+Nord+U-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True';
+
+    var options = {
+      url: 'http://localhost:5000',
+      method: 'POST',
+      body: dataString
+    };
+    function callback(error, response, body) {
+      console.log(error)
+      if (!error && response.statusCode == 200) {
+        console.log(body);
       }
     }
-    xhr.send(`${url}&dayOfSearch=2019-12-10+23:00:00`);
-    // xhr.send(new Int8Array()); 
-    // xhr.send(document);
+
+    request(options, callback);
+
   }
+
 
   return (
     <div className="InitialForm">
@@ -70,13 +95,13 @@ function InitialForm() {
         <Grid container justify="center" direction="column" alignItems="center">
           <TextField
             label="From"
-            value={state.originAddress}
-            onChange={handleChangeTextField("originAddress")}
+            value={state.startAddress}
+            onChange={handleChangeTextField("startAddress")}
           />
           <TextField
             label="To"
-            value={state.destinationAddress}
-            onChange={handleChangeTextField("destinationAddress")}
+            value={state.endAddress}
+            onChange={handleChangeTextField("endAddress")}
             style={{ marginBottom: "20px" }}
           />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>

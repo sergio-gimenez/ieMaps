@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from './icon.png';
 import './App.css';
-
-import InitialForm from 'initialForm.js'
+import InitialForm from './InitialForm.js';
 
 function App() {
     return (
