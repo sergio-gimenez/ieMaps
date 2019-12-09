@@ -9,6 +9,7 @@ import { green } from '@material-ui/core/colors';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import AjaxRequest from './ajax';
 
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -45,49 +46,6 @@ function InitialForm() {
     }
     url += key + "=" + encodeURIComponent(state[key]);
   }
-
-  const buildURL = () => {
-    // // const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
-    // // create a new XMLHttpRequest
-    // var xhr = new XMLHttpRequest();
-
-    // // get a callback when the server responds
-    // // xhr.addEventListener('load', () => {
-    // //   // update the state of the component with the result here
-    // //   console.log(xhr.responseText)
-    // // })
-    // // open the request with the verb and the url
-    // xhr.open('POST', 'http://localhost:5000', true);
-    // // xhr.withCredentials=true;
-    // //xhr.setRequestHeader("Content-Length:" url.length)
-    // xhr.setRequestHeader("Access-Control-Allow-Origin","*");
-    // xhr.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    // xhr.setRequestHeader("Accept","*/*");
-    // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    // // send the request
-    // console.log(`?${url}&dayOfSearch=2019-12-10+23:00:00`);
-    // xhr.send(`"?${url}&dayOfSearch=2019-12-10+23:00:00"`);
-
-    var request = require('request');
-
-    var dataString = 'startAddress=Edificio+B3+-+Campus+Nord+U-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True';
-
-    var options = {
-      url: 'http://localhost:5000',
-      method: 'POST',
-      body: dataString
-    };
-    function callback(error, response, body) {
-      console.log(error)
-      if (!error && response.statusCode == 200) {
-        console.log(body);
-      }
-    }
-
-    request(options, callback);
-
-  }
-
 
   return (
     <div className="InitialForm">
@@ -146,7 +104,7 @@ function InitialForm() {
             }
             label="Electric car"
           />
-          <Button variant="contained" onClick={buildURL}>Submit</Button>
+          <Button variant="contained" href="root/">Submit</Button>
         </Grid>
       </header>
     </div>
