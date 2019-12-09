@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import logo from './icon.png';
-import './InitialForm.css';
+import './App.css';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -9,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-
+import Button from '@material-ui/core/Button';
 
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -17,8 +16,8 @@ function InitialForm() {
     checkedTaxi: false,
     checkedDisability: false,
     checkedElectric: false,
-    originAddress: '',
-    destinationAddress: '',
+    startAddress: '',
+    endAddress: '',
   });
 
   const handleChangeCheckBox = name => event => {
@@ -38,12 +37,20 @@ function InitialForm() {
     },
     checked: {},
   })(props => <Checkbox color="default" {...props} />);
-  console.log(state)
-  console.log(selectedDate.toString())
+
+  var url = "";
+  for (var key in state) {
+    if (url != "") {
+      url += "&";
+    }
+    url += key + "=" + encodeURIComponent(state[key]);
+  }
+
+  const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className="InitialForm">
+      <header className="InitialForm-header">
         <Grid container justify="center" direction="column" alignItems="center">
           <TextField
             label="From"
@@ -98,6 +105,7 @@ function InitialForm() {
             }
             label="Electric car"
           />
+          <Button variant="contained">Submit</Button>
         </Grid>
       </header>
     </div>
