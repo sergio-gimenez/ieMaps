@@ -9,7 +9,8 @@ import { green } from '@material-ui/core/colors';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import AjaxRequest from './ajax';
+import history from './history';
+
 
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
@@ -46,6 +47,7 @@ function InitialForm() {
     }
     url += key + "=" + encodeURIComponent(state[key]);
   }
+  url = state.url;
 
   return (
     <div className="InitialForm">
@@ -104,7 +106,7 @@ function InitialForm() {
             }
             label="Electric car"
           />
-          <Button variant="contained" href="root/">Submit</Button>
+          <Button variant="contained" onClick={() => history.push('/search')}>Submit</Button>
         </Grid>
       </header>
     </div>

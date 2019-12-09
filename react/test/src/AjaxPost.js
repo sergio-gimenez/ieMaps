@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 class AjaxRequest extends React.Component {
     constructor(props) {
@@ -6,7 +7,6 @@ class AjaxRequest extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
         };
     }
 
@@ -16,16 +16,16 @@ class AjaxRequest extends React.Component {
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
             }),
-            body: "startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True" // <-- Post parameters
-            // body: this.props.url
+            // body: "startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True" // <-- Post parameters
+            body: this.props.url
         })
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(JSON.stringify(result, null, 2))
+                    // console.log(JSON.stringify(result, null, 2))
+                    console.log(this.props.url)
                     this.setState({
                         isLoaded: true,
-                        driving: result.driving
                     });
                 },
                 // Note: it's important to handle errors here
@@ -41,7 +41,7 @@ class AjaxRequest extends React.Component {
     }
 
     render() {
-        const { error, isLoaded, result } = this.state;
+        const { error, isLoaded} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
