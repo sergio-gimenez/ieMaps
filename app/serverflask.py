@@ -5,6 +5,8 @@ from flask_cors import cross_origin
 import json
 from ieMaps import ieMaps
 from initial_form import Initialform
+from flask import request
+
 
 
 def frontAddressQueryToBackend(queryJSON):
@@ -22,11 +24,23 @@ json_to_send_to_lady_lax = ieMaps(frontAddressQueryToBackend(json.dumps(json_i))
 
 app = Flask(__name__) 
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 @cross_origin()
 def hello():
-    print('during view')
-    return json_to_send_to_lady_lax
+
+	#Test POST
+	# curl -d "start_address=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&end_address=Plaça+Catalunya,+Barcelona&date=2019-12-10+23:00:00&disability=True&taxi=False&electric=True"
+
+    if request.method == 'POST':
+	json_i = [{}]
+	json_i[0]['start_address'] = request.form['start_address']
+	json_i[0]['end_address'] = request.form['end_address']
+	json_i[0]['date'] = request.form['date']
+	json_i[0]['disability'] = request.form['disability']	
+	json_i[0]['taxi'] = request.form['taxi']
+	json_i[0]['electric'] = request.form['electric']			
+	
+	return ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))	
 
 @app.teardown_request
 def show_teardown(exception):
