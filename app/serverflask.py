@@ -5,32 +5,42 @@ from flask_cors import cross_origin
 import json
 from ieMaps import ieMaps
 from initial_form import Initialform
-
+from flask import request
 
 def frontAddressQueryToBackend(queryJSON):
-    return json.loads(queryJSON)
+	return json.loads(queryJSON)
 
 json_i = [{}]
-json_i[0]['start_adress'] = Initialform.startAddress
-json_i[0]['end_adress'] = Initialform.endAddress
-json_i[0]['time_of_search'] = Initialform.dayOfSearch
-json_i[0]['dis'] = Initialform.dis
-json_i[0]['ev'] = Initialform.ev
-json_i[0]['taxi'] = Initialform.taxi
+# json_i[0]['start_adress'] = Initialform.startAddress
+# json_i[0]['end_adress'] = Initialform.endAddress
+# json_i[0]['time_of_search'] = Initialform.dayOfSearch
+# json_i[0]['dis'] = Initialform.dis
+# json_i[0]['ev'] = Initialform.ev
+# json_i[0]['taxi'] = Initialform.taxi
 
-json_to_send_to_lady_lax = ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))
+# json_to_send_to_lady_lax = ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))
 
 app = Flask(__name__) 
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 @cross_origin()
 def hello():
-    print('during view')
-    return json_to_send_to_lady_lax
+#Test POST
+#curl localhost:5000 -d "startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True"
+
+	if request.method == 'POST':
+		json_i[0]['start_adress'] = request.form['startAddress']
+		json_i[0]['end_adress'] = request.form['endAddress']
+		json_i[0]['time_of_search'] = request.form['dayOfSearch']
+		json_i[0]['dis'] = request.form['dis']	
+		json_i[0]['taxi'] = request.form['taxi']
+		json_i[0]['ev'] = request.form['ev']			
+
+		return ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))	
 
 @app.teardown_request
 def show_teardown(exception):
-    print('after with block')
+	print('after with block')
 
 with app.test_request_context():
     print('during with block')
