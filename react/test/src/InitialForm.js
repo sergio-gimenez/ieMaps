@@ -13,9 +13,9 @@ import Button from '@material-ui/core/Button';
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
   const [state, setState] = React.useState({
-    checkedTaxi: false,
-    checkedDisability: false,
-    checkedElectric: false,
+    taxi: false,
+    dis: false,
+    ev: false,
     startAddress: '',
     endAddress: '',
   });
@@ -46,8 +46,24 @@ function InitialForm() {
     url += key + "=" + encodeURIComponent(state[key]);
   }
 
-  const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
-  
+  const buildURL = () => {
+    // const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", 'localhost:3000', true);
+
+    //Send the proper header information along with the request
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () { // Call a function when the state changes.
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        // Request finished. Do processing here.
+      }
+    }
+    xhr.send(`${url}&dayOfSearch=2019-12-10+23:00:00`);
+    // xhr.send(new Int8Array()); 
+    // xhr.send(document);
+  }
+
   return (
     <div className="InitialForm">
       <header className="InitialForm-header">
@@ -105,7 +121,7 @@ function InitialForm() {
             }
             label="Electric car"
           />
-          <Button variant="contained">Submit</Button>
+          <Button variant="contained" onClick={buildURL}>Submit</Button>
         </Grid>
       </header>
     </div>
