@@ -39,12 +39,12 @@ https://gist.github.com/subfuzion/08c5d85437d5d4f00e58
 
     if request.method == 'POST':
 	json_i = [{}]
-	json_i[0]['start_address'] = request.form['start_address']
-	json_i[0]['end_address'] = request.form['end_address']
+	json_i[0]['start_address'] = request.form['startAddress']
+	json_i[0]['end_address'] = request.form['endAddress']
 	json_i[0]['date'] = request.form['date']
-	json_i[0]['disability'] = request.form['disability']	
-	json_i[0]['taxi'] = request.form['taxi']
-	json_i[0]['electric'] = request.form['electric']			
+	json_i[0]['disability'] = request.form['checkedDisability']	
+	json_i[0]['taxi'] = request.form['checkedTaxi']
+	json_i[0]['electric'] = request.form['checkedElectric']			
 	
 	return ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))	
 
