@@ -14,7 +14,7 @@ import history from './history';
 
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     startAddress: '',
     endAddress: '',
     taxi: false,
@@ -30,6 +30,25 @@ function InitialForm() {
     setState({ ...state, [name]: event.target.value });
   };
 
+  function getUrlFromState(object) {
+    var url = "";
+    for (var key in object) {
+      if (url !== "") {
+        url += "&";
+      }
+      url += key + "=" + encodeURIComponent(object[key]);
+    }
+    return url;
+  }
+
+  function getFormattedDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear().toString();
+    var time = [date.getHours(),date.getMinutes(),date.getSeconds()].join(':');
+    return `${year}-${day}-${month}+${time}`;
+  }
+
   const GreenCheckbox = withStyles({
     root: {
       color: green[400],
@@ -40,14 +59,8 @@ function InitialForm() {
     checked: {},
   })(props => <Checkbox color="default" {...props} />);
 
-  var url = "";
-  for (var key in state) {
-    if (url !== "") {
-      url += "&";
-    }
-    url += key + "=" + encodeURIComponent(state[key]);
-  }
-  url = state.url;
+  var paramsUrl = `${getUrlFromState(state)}&${getFormattedDate(selectedDate)}`
+  console.log(paramsUrl);
 
   return (
     <div className="InitialForm">
