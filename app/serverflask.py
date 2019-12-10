@@ -1,35 +1,27 @@
 from flask import Flask, request
-#from flask.ext.cors import CORS, cross_origin
-#from flask_module import CORS, cross_origin
 from flask_cors import cross_origin
 import json
 from ieMaps import ieMaps
-from initial_form import Initialform
 from flask import request
 
 
+# Function to pass the form query from the view to the model
 def frontAddressQueryToBackend(queryJSON):
     return json.loads(queryJSON)
 
 
-json_i = [{}]
-# json_i[0]['start_adress'] = Initialform.startAddress
-# json_i[0]['end_adress'] = Initialform.endAddress
-# json_i[0]['time_of_search'] = Initialform.dayOfSearch
-# json_i[0]['dis'] = Initialform.dis
-# json_i[0]['ev'] = Initialform.ev
-# json_i[0]['taxi'] = Initialform.taxi
-
-# json_to_send_to_lady_lax = ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))
-
+json_i = [{}]  # Initialize JSON file
 app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
 @cross_origin()
 def hello():
+
     # Test POST
-    # curl localhost:5000 -d "startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True"
+    # curl localhost:5000 -d "startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,
+    # +Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,
+    # +Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True"
 
     if request.method == 'POST':
         json_i[0]['start_adress'] = request.form['startAddress']
