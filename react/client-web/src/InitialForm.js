@@ -46,7 +46,7 @@ function InitialForm() {
     var month = date.getMonth() + 1;
     var year = date.getFullYear().toString();
     var time = [date.getHours(),date.getMinutes(),date.getSeconds()].join(':');
-    return `${year}-${day}-${month}+${time}`;
+    return `dayOfSearch=${year}-${month}-${day}+${time}`;
   }
 
   const GreenCheckbox = withStyles({
@@ -60,9 +60,9 @@ function InitialForm() {
   })(props => <Checkbox color="default" {...props} />);
 
   var paramsUrl = `${getUrlFromState(state)}&${getFormattedDate(selectedDate)}`
-  console.log(paramsUrl);
 
   return (
+  
     <div className="InitialForm">
       <header className="InitialForm-header">
         <Grid container justify="center" direction="column" alignItems="center">
@@ -92,9 +92,9 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedTaxi}
-                onChange={handleChangeCheckBox('checkedTaxi')}
-                value="checkedTaxi"
+                checked={state.taxi}
+                onChange={handleChangeCheckBox('taxi')}
+                value="taxi"
               />
             }
             label="Taxi"
@@ -102,9 +102,9 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedDisability}
-                onChange={handleChangeCheckBox('checkedDisability')}
-                value="checkedDisability"
+                checked={state.dis}
+                onChange={handleChangeCheckBox('dis')}
+                value="dis"
               />
             }
             label="Disability"
@@ -112,14 +112,14 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedElectric}
-                onChange={handleChangeCheckBox('checkedElectric')}
-                value="checkedElectric"
+                checked={state.ev}
+                onChange={handleChangeCheckBox('ev')}
+                value="ev"
               />
             }
             label="Electric car"
           />
-          <Button variant="contained" onClick={() => history.push('/search')}>Submit</Button>
+          <Button variant="contained" onClick={() => history.push(`/search/${paramsUrl}`)}>Submit</Button>
         </Grid>
       </header>
     </div>

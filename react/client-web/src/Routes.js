@@ -11,7 +11,7 @@ class Routes extends React.Component {
             <Router history={history} >
                 <Switch>
                     <Route path="/" exact component={InitalForm} />
-                    <Route path="/search" render={(props)=> <Search {...props} url="startAddress=Edificio+B3+-+Campus+Nord+UPC+1-3,+Carrer+de+Jordi+Girona,+08034+Barcelona&endAddress=Plaça+Catalunya,+Barcelona&dayOfSearch=2019-12-10+23:00:00&dis=True&taxi=False&ev=True"/>} />
+                    <Route path="/search" render={(props)=> <Search {...props} url={history.location.pathname}/>} />
                 </Switch>
             </Router>
         )
