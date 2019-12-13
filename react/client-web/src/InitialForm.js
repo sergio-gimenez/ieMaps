@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './App.css';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -10,6 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import history from './history';
+import logo from './icon.png';
 
 
 function InitialForm() {
@@ -45,7 +45,7 @@ function InitialForm() {
     var day = date.getDate();
     var month = date.getMonth() + 1;
     var year = date.getFullYear().toString();
-    var time = [date.getHours(),date.getMinutes(),date.getSeconds()].join(':');
+    var time = [date.getHours(), date.getMinutes(), date.getSeconds()].join(':');
     return `dayOfSearch=${year}-${month}-${day}+${time}`;
   }
 
@@ -62,10 +62,11 @@ function InitialForm() {
   var paramsUrl = `${getUrlFromState(state)}&${getFormattedDate(selectedDate)}`
 
   return (
-  
+
     <div className="InitialForm">
       <header className="InitialForm-header">
         <Grid container justify="center" direction="column" alignItems="center">
+          <img src={logo} className="App-logo" alt="logo" />
           <TextField
             label="From"
             value={state.startAddress}
