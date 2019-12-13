@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-
+import './App.css';
 import InitalForm from "./InitialForm";
 import Search from "./AjaxPost";
 import View from "./View";

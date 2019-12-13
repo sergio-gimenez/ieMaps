@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import logo from './icon.png';
+import Grid from '@material-ui/core/Grid';
 
 class AjaxRequest extends React.Component {
     constructor(props) {
@@ -40,13 +42,20 @@ class AjaxRequest extends React.Component {
     }
 
     render() {
-        const { error, isLoaded} = this.state;
+        const { error, isLoaded } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            return (
+            <div>
+                <Grid container justify="center" direction="column" alignItems="center">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    Loading...
+                </Grid>
+            </div>
+            );
         } else {
-            return <div>CACA</div>
+            return <div>Done</div>
         }
     }
 }
