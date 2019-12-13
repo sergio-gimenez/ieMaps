@@ -16,7 +16,6 @@ class AjaxRequest extends React.Component {
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
             }),
-            // body: this.props.url
             body: this.props.url.substring(8)
         })
             .then(res => res.json())
@@ -26,6 +25,7 @@ class AjaxRequest extends React.Component {
                     this.setState({
                         isLoaded: true,
                     });
+                    this.props.history.push(`/view/`)
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
