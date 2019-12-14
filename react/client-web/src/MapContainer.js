@@ -20,10 +20,22 @@ export class MapContainer extends Component {
                 zoom={14}
                 style={mapStyles}
                 initialCenter={{
-                    lat: this.props.lat,
-                    lng: this.props.lon
+                    lat: this.props.startLat,
+                    lng: this.props.startLon
                 }}
-            />
+            >
+                <Marker
+                    lat={this.props.startLat}
+                    lng={this.props.startLon}
+                    name="Marker 1"
+                />
+                <Marker
+                    lat={this.props.endLat}
+                    lng={this.props.endLon}
+                    name="Marker 2"
+                />
+            </Map>
+
         );
     }
 }

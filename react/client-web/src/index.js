@@ -4,12 +4,13 @@ import './css/index.css';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
-
+import JSONparse from './JSONparse';
 
 ReactDOM.render(
     <Router>
         <Routes />
     </Router>,
+    // <JSONparse/>,
     document.getElementById('root'));
 
 

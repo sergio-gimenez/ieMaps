@@ -11,7 +11,8 @@ class SplitScreen extends Component {
     return (
       <section class="container">
         <div class="left-half">
-          <MapContainer lat={this.props.lat} lon={this.props.lon}/>
+          <MapContainer startLat={this.props.startLat} startLon={this.props.startLon}
+                endLat={this.props.endLat} endLon={this.props.endLon}/>
         </div>
         <div class="right-half">
           <h1>Right Half</h1>
