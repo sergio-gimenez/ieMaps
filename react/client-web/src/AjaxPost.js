@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import logo from './icon.png';
+import './css/App.css';
+import logo from './imgs/icon.png';
 import Grid from '@material-ui/core/Grid';
 
 class AjaxRequest extends React.Component {
@@ -23,11 +23,11 @@ class AjaxRequest extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(JSON.stringify(result, null, 2))
+                    console.log(JSON.stringify(result.driving, null, 2))
                     this.setState({
                         isLoaded: true,
                     });
-                    this.props.history.push(`/view/`)
+                    // this.props.history.push(`/view/`)
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
