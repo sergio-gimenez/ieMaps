@@ -1,10 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import InitialForm from './InitialForm';
+import './css/index.css';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './Routes';
+import JSONparse from './JSONparse';
+import ViewSplit from './ViewSplit';
 
-ReactDOM.render(<InitialForm />, document.getElementById('root'));
+ReactDOM.render(
+    // <Router>
+    //     <Routes />
+    // </Router>,
+    // <JSONparse/>,
+    <ViewSplit/>,
+    document.getElementById('root'));
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

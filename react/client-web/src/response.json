@@ -1,0 +1,92 @@
+{
+    "driving": {
+        "mode": "driving",
+        "start_description": "Carrer de Jordi Girona, 1-3, 08034 Barcelona, Spain",
+        "end_description": "Catalunya, 08002 Barcelona, Spain",
+        "distance": "6.0 km",
+        "time": "20 mins",
+        "start_lat": 41.3879622,
+        "start_lon": 2.1125241,
+        "end_lat": 41.38736,
+        "end_lon": 2.1696958,
+        "warnings": [],
+        "co2_trip": 1.2151889686100223,
+        "price": 0.683872579737242,
+        "pollution_index": "No data available",
+        "temperature": 8.52,
+        "precipitation_percentage": 0.0,
+        "precipitation_intensity": 0.0,
+        "closes_charging_station": [
+            41.388423,
+            2.169394
+        ],
+        "closes_parking_for_PRM": [
+            41.387254799999994,
+            2.1684804
+        ]
+    },
+    "walking": {
+        "mode": "walking",
+        "start_description": "Carrer de Jordi Girona, 1-3, 08034 Barcelona, Spain",
+        "end_description": "Catalunya, 08002 Barcelona, Spain",
+        "distance": "5.3 km",
+        "time": "1 hour 3 mins",
+        "start_lat": 41.3879622,
+        "start_lon": 2.1125241,
+        "end_lat": 41.38736,
+        "end_lon": 2.1696958,
+        "warnings": [],
+        "co2_trip": 0,
+        "price": 0,
+        "co2_trip_car": 1.2151889686100223,
+        "petrol_car_price": 0.683872579737242,
+        "pollution_index": "No data available",
+        "temperature": 8.52,
+        "precipitation_percentage": 0.0,
+        "precipitation_intensity": 0.0
+    },
+    "bicycling": {
+        "mode": "bicycling",
+        "start_description": "Carrer de Jordi Girona, 1-3, 08034 Barcelona, Spain",
+        "end_description": "Catalunya, 08002 Barcelona, Spain",
+        "distance": "5.8 km",
+        "time": "17 mins",
+        "start_lat": 41.3879622,
+        "start_lon": 2.1125241,
+        "end_lat": 41.38736,
+        "end_lon": 2.1696958,
+        "warnings": [],
+        "co2_trip": 0,
+        "price": 0,
+        "co2_trip_car": 1.2151889686100223,
+        "petrol_car_price": 0.683872579737242,
+        "pollution_index": "No data available",
+        "temperature": 8.52,
+        "precipitation_percentage": 0.0,
+        "precipitation_intensity": 0.0,
+        "closes_parking_for_bike": [
+            41.3878749,
+            2.1696415
+        ]
+    },
+    "transit": {
+        "mode": "transit",
+        "start_description": "Carrer de Jordi Girona, 1-3, 08034 Barcelona, Spain",
+        "end_description": "Catalunya, 08002 Barcelona, Spain",
+        "distance": "6.4 km",
+        "time": "33 mins",
+        "start_lat": 41.3879622,
+        "start_lon": 2.1125241,
+        "end_lat": 41.38736,
+        "end_lon": 2.1696958,
+ "warnings": [],
+        "co2_trip": 0.19129302929713063,
+        "price": 2.2,
+        "co2_trip_car": 1.2151889686100223,
+        "petrol_car_price": 0.683872579737242,
+        "pollution_index": "No data available",
+        "temperature": 8.52,
+        "precipitation_percentage": 0.0,
+        "precipitation_intensity": 0.0
+    }
+}
