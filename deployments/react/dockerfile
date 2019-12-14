@@ -7,11 +7,12 @@ WORKDIR /react
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /react/node_modules/.bin:$PATH
 
-# install and cache app dependencies
-COPY react/package-lock.json /react/package-lock.json
-#COPY . ./
+COPY react/* /react/
+
+RUN mkdir -p /react/public
+RUN touch /react/public/index.html
+
 RUN npm install --silent
-#RUN npm install react-scripts@3.0.1 -g --silent
 
 # start app
 CMD ["npm", "start"]
