@@ -1,9 +1,17 @@
 version: "3"
 services:
-    app:
-        container_name: ieMaps_BE
-        build: 
-          context: ../
-          dockerfile: deployments/app/dockerfile
-        ports: 
-          - "5000:5000"
+  iemaps_frontend:
+    container_name: iemaps_react
+    build:
+        context: ../
+        dockerfile: deployments/react/dockerfile
+    ports:
+      - "3000:3000"    
+      
+  iemaps_backend:
+    container_name: ieMaps_flask
+    build: 
+      context: ../
+      dockerfile: deployments/flask/dockerfile
+    ports: 
+      - "5000:5000"
