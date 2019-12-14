@@ -38,6 +38,17 @@ def hello():
 
 		return ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))	
 
+	if request.method == 'GET':
+		json_i[0]['start_adress'] = request.form['startAddress']
+		json_i[0]['end_adress'] = request.form['endAddress']
+		json_i[0]['time_of_search'] = request.form['dayOfSearch']
+		json_i[0]['dis'] = request.form['dis']	
+		json_i[0]['taxi'] = request.form['taxi']
+		json_i[0]['ev'] = request.form['ev']			
+
+		return ieMaps(frontAddressQueryToBackend(json.dumps(json_i)))	
+
+
 @app.teardown_request
 def show_teardown(exception):
 	print('after with block')

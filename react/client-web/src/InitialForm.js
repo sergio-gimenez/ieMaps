@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './App.css';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -9,15 +8,18 @@ import { green } from '@material-ui/core/colors';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import history from './history';
+import logo from './imgs/icon.png';
+
 
 function InitialForm() {
   const [selectedDate, handleDateChange] = useState(new Date());
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
+    startAddress: '',
+    endAddress: '',
     taxi: false,
     dis: false,
     ev: false,
-    startAddress: '',
-    endAddress: '',
   });
 
   const handleChangeCheckBox = name => event => {
@@ -27,6 +29,25 @@ function InitialForm() {
   const handleChangeTextField = name => event => {
     setState({ ...state, [name]: event.target.value });
   };
+
+  function getUrlFromState(object) {
+    var url = "";
+    for (var key in object) {
+      if (url !== "") {
+        url += "&";
+      }
+      url += key + "=" + encodeURIComponent(object[key]);
+    }
+    return url;
+  }
+
+  function getFormattedDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear().toString();
+    var time = [date.getHours(), date.getMinutes(), date.getSeconds()].join(':');
+    return `dayOfSearch=${year}-${month}-${day}+${time}`;
+  }
 
   const GreenCheckbox = withStyles({
     root: {
@@ -38,45 +59,23 @@ function InitialForm() {
     checked: {},
   })(props => <Checkbox color="default" {...props} />);
 
-  var url = "";
-  for (var key in state) {
-    if (url != "") {
-      url += "&";
-    }
-    url += key + "=" + encodeURIComponent(state[key]);
-  }
-
-  const buildURL = () => {
-    // const urlObj = new URL(`http://localhost:3000/${url}&date=2019-12-10+23:00:00`);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'localhost:3000', true);
-
-    //Send the proper header information along with the request
-    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange = function () { // Call a function when the state changes.
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-        // Request finished. Do processing here.
-      }
-    }
-    xhr.send(`${url}&dayOfSearch=2019-12-10+23:00:00`);
-    // xhr.send(new Int8Array()); 
-    // xhr.send(document);
-  }
+  var paramsUrl = `${getUrlFromState(state)}&${getFormattedDate(selectedDate)}`
 
   return (
+
     <div className="InitialForm">
       <header className="InitialForm-header">
         <Grid container justify="center" direction="column" alignItems="center">
+          <img src={logo} className="App-logo" alt="logo" />
           <TextField
             label="From"
-            value={state.originAddress}
-            onChange={handleChangeTextField("originAddress")}
+            value={state.startAddress}
+            onChange={handleChangeTextField("startAddress")}
           />
           <TextField
             label="To"
-            value={state.destinationAddress}
-            onChange={handleChangeTextField("destinationAddress")}
+            value={state.endAddress}
+            onChange={handleChangeTextField("endAddress")}
             style={{ marginBottom: "20px" }}
           />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -94,9 +93,9 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedTaxi}
-                onChange={handleChangeCheckBox('checkedTaxi')}
-                value="checkedTaxi"
+                checked={state.taxi}
+                onChange={handleChangeCheckBox('taxi')}
+                value="taxi"
               />
             }
             label="Taxi"
@@ -104,9 +103,9 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedDisability}
-                onChange={handleChangeCheckBox('checkedDisability')}
-                value="checkedDisability"
+                checked={state.dis}
+                onChange={handleChangeCheckBox('dis')}
+                value="dis"
               />
             }
             label="Disability"
@@ -114,14 +113,14 @@ function InitialForm() {
           <FormControlLabel
             control={
               <GreenCheckbox
-                checked={state.checkedElectric}
-                onChange={handleChangeCheckBox('checkedElectric')}
-                value="checkedElectric"
+                checked={state.ev}
+                onChange={handleChangeCheckBox('ev')}
+                value="ev"
               />
             }
             label="Electric car"
           />
-          <Button variant="contained" onClick={buildURL}>Submit</Button>
+          <Button variant="contained" onClick={() => history.push(`/search/${paramsUrl}`)}>Submit</Button>
         </Grid>
       </header>
     </div>
