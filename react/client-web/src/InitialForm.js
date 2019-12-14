@@ -9,7 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import history from './history';
-import logo from './icon.png';
+import logo from './imgs/icon.png';
 
 
 function InitialForm() {
