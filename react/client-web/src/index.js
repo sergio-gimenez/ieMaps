@@ -5,12 +5,14 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
 import JSONparse from './JSONparse';
+import ViewSplit from './ViewSplit';
 
 ReactDOM.render(
-    <Router>
-        <Routes />
-    </Router>,
+    // <Router>
+    //     <Routes />
+    // </Router>,
     // <JSONparse/>,
+    <ViewSplit/>,
     document.getElementById('root'));
 
 
