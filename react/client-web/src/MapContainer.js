@@ -13,6 +13,7 @@ export class MapContainer extends Component {
         activeMarker: {},          //Shows the active marker upon click
         selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
     };
+
     render() {
         return (
             <Map
@@ -25,14 +26,16 @@ export class MapContainer extends Component {
                 }}
             >
                 <Marker
-                    lat={this.props.startLat}
-                    lng={this.props.startLon}
-                    name="Marker 1"
+                    onClick={this.onMarkerClick}
+                    name={'Current location 1'}
+                    position={{ lat: this.props.startLat, lng: this.props.startLon }}
+                    animation={this.props.google.maps.Animation.DROP}
                 />
                 <Marker
-                    lat={this.props.endLat}
-                    lng={this.props.endLon}
-                    name="Marker 2"
+                    onClick={this.onMarkerClick}
+                    name={'Current location 2'}
+                    position={{ lat: this.props.endLat, lng: this.props.endLon }}
+                    animation={this.props.google.maps.Animation.DROP}
                 />
             </Map>
 

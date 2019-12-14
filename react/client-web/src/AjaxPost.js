@@ -33,9 +33,6 @@ class AjaxRequest extends React.Component {
                     });
                     // this.props.history.push(`/view/`)
                 },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
                     this.setState({
                         isLoaded: true,
@@ -44,10 +41,6 @@ class AjaxRequest extends React.Component {
                 }
             )
     }
-
-    // renderView(startLat,startLon){
-    //     
-    // }
 
     render() {
         const { error, isLoaded } = this.state;
@@ -63,7 +56,6 @@ class AjaxRequest extends React.Component {
                 </div>
             );
         } else {
-            // return this.renderView(this.state.start_lat,this.state.start_lon);
             return <View startLat={this.state.start_lat} startLon={this.state.start_lon}
                 endLat={this.state.end_lat} endLon={this.state.end_lon} />
         }
