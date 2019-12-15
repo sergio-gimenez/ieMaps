@@ -4,7 +4,6 @@
 }
 body {
   font-size: 1.25rem;
-  font-family: sans-serif;
   line-height: 150%;
 }
 
@@ -25,15 +24,15 @@ div {
   padding: 20px;
 } */
 
-h1 {
+/* h1 {
   font-size: 1.75rem;
   margin: 0 0 0.75rem 0;
-}
+} */
 
-.container {
+/* .container {
   display: table;
   width: 100%;
-}
+} */
 
 .left-half {
   background-color: whitesmoke;
