@@ -5,6 +5,33 @@
 
 # Table of contents
 
+- [ieMaps: an inclusive eco-friendly app for mobility](#iemaps-an-inclusive-eco-friendly-app-for-mobility)
+- [Table of contents](#table-of-contents)
+- [Overview](#overview)
+- [Run the project](#run-the-project)
+  - [Requeriments](#requeriments)
+    - [Docker](#docker)
+    - [docker-compose](#docker-compose)
+  - [Running](#running)
+    - [Fast run (plug-and-play)](#fast-run-plug-and-play)
+    - [Run it locally](#run-it-locally)
+- [How does it works?](#how-does-it-works)
+    - [Server Code (Model)](#server-code-model)
+    - [Flask (Controller)](#flask-controller)
+    - [React (View)](#react-view)
+- [Parameters calulation](#parameters-calulation)
+  - [Forecast prediction model](#forecast-prediction-model)
+  - [Air quality](#air-quality)
+  - [Availability of electric vehicle chargers](#availability-of-electric-vehicle-chargers)
+  - [Carbon footprint calculation](#carbon-footprint-calculation)
+  - [Car parking spots for PRM (People with Reduced Mobility)](#car-parking-spots-for-prm-people-with-reduced-mobility)
+  - [Bike parking spots for bikes](#bike-parking-spots-for-bikes)
+  - [Temperature](#temperature)
+  - [Precipitation in real time and precipitation prediction](#precipitation-in-real-time-and-precipitation-prediction)
+  - [Taxi pricing](#taxi-pricing)
+
+
+
 # Overview
 
 **ieMaps** is an **inclusive** and **eco-friendly** Google Maps implementation.
@@ -39,15 +66,15 @@ By know, we take care of the following parameters in the city of **Barcelona**:
 * Closest bike parking spot close to destination
 * Price of taxis
 
-## Run the project
-----
+# Run the project
 
-### Requeriments
+
+## Requeriments
 To run the implementation, make sure you have installed Docker Engine and Docker-compose.
 
 If not, check the following instructions:
 
-#### Docker
+### Docker
 
 To install docker check official installation guide for [Windows](https://docs.docker.com/docker-for-windows/install/),
 [Mac](https://docs.docker.com/docker-for-mac/install/) or
@@ -88,7 +115,7 @@ Reboot to apply this change.
 
 ---
 
-#### docker-compose
+### docker-compose
 
 
 For docker-compose, just run these commands:
@@ -99,14 +126,13 @@ sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo chmod +x /usr/bin/docker-compose
 ```
 
-### Running
----
+## Running
 
-#### Fast run (plug-and-play)
+### Fast run (plug-and-play)
 In order to run the project in dockers, just run the `deploy.sh` bash script located in the
 root project folder.
 
-#### Run it locally
+### Run it locally
 Node server and Flask server can be runned locally by installing all the
 dependencies locally. 
 
@@ -125,10 +151,10 @@ For the **flask (python)** server:
 
 
 
-## How does it works?
+# How does it works?
 
 
-![MVC_diagram](/imga/MVC_diagram.png)
+![MVC_diagram](/img/MVC_diagram.png)
 
 
 ### Server Code (Model)
@@ -146,10 +172,10 @@ React is a JavaScript library for building user interfaces. Is the responsible
 of creating the **input form** and sending it to the Flask API. Then it waits to
 the JSON response and prints the information from the JSON in a map and in the screen.
 
-## Parameters calulation
+# Parameters calulation
 
 
-### Forecast prediction model
+## Forecast prediction model
 We have used a **'Exponential smoothing state space model'** that predicts the weather for the following days.
 
 We have implemented the model in R and used this [forecast package](https://www.rdocumentation.org/packages/forecast/versions/8.9) for the **Air Quality** prediction.
@@ -157,18 +183,17 @@ We have implemented the model in R and used this [forecast package](https://www.
 Used API
 [Forecasting Functions for Time Series and Linear Models](https://www.rdocumentation.org/packages/forecast/versions/8.9)
 
-
-### Air quality
+## Air quality
 We have implemented a non-linear scale between one and three averaging the scaled values for each non-healthy emitted gas.
 
 ![footprint](/img/footprint.jpeg)
 
 [Qualitat de l'aire dataset](https://opendata-ajuntament.barcelona.cat/data/en/dataset/qualitat-aire-detall-bcn)
 
-### Availability of electric vehicle chargers
+## Availability of electric vehicle chargers
 We have used a [dataset](https://opendata-ajuntament.barcelona.cat/resources/bsm/PUNTS_RECARREGA_VEHICLES_ELECTRICS.csv) given at Everis talk.
 
-### Carbon footprint calculation
+## Carbon footprint calculation
 > (Kg CO2 / l) * l/km * desplacement
 
 * [Carbon intensity (kg of CO2 emitted per electricity kWh produced)](https://www.electricitymap.org/?page=country&solar=false&remote=true&wind=false&countryCode=ES)
@@ -182,26 +207,26 @@ ENVIRONMENT FACTORS ON TRANSPORT CO2
 EMISSIONS: THE CASE STUDY OF
 AUTONOMOUS UNIVERSITY OF BARCELONA](http://oa.upm.es/49947/1/INVE_MEM_2017_271545.pdf)
 
-### Car parking spots for PRM (People with Reduced Mobility)
+## Car parking spots for PRM (People with Reduced Mobility)
 We have taken information of PRM spots at this dataset: [Typology of the reserved parking spots in the infrastructure network of the city of Barcelona
 ](https://opendata-ajuntament.barcelona.cat/data/en/dataset/infraestructures-m-reserves).
 
-### Bike parking spots for bikes
+## Bike parking spots for bikes
 We have taken information of PRM spots at this [dataset]().
 
-### Temperature
+## Temperature
 We have used the [Dark Sky](https://darksky.net/dev) API. It allows you to look up weather around the globe. Returning:
 
 * Current weather condition
 * Minute-byminute forecasts to one to one hour
 
 
-### Precipitation in real time and precipitation prediction
+## Precipitation in real time and precipitation prediction
 We have used the [Dark Sky](https://darksky.net/dev) API. It allows you to look up weather around the globe. Returning:
 
 * Current weather condition
 * Minute-byminute forecasts to one to one hour
 
 
-### Taxi pricing
+## Taxi pricing
 ![TaxiTable](/img/taxiTable.jpeg)
