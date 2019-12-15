@@ -1,64 +1,153 @@
-# iEMaps: an inclusive eco-friendly app for mobility
-(copyright not included)
+# ieMaps: an inclusive eco-friendly app for mobility
 
 ![/img/ieMaps.png](/img/iemaps.png)
 
 
-
 # Table of contents
-
-* [iEMaps: an inclusive eco-friendly app for mobility](#iemaps-an-inclusive-eco-friendly-app-for-mobility)
-* [Overview](#overview)
-   * [Marketing stuff](#marketing-stuff)
-      * [Eco-friendly stuff](#eco-friendly-stuff)
-      * [Inclusive stuff](#inclusive-stuff)
-      * [Hippie stuff](#hippie-stuff)
-   * [Technical stuff](#technical-stuff)
-      * [Forecast prediction model](#forecast-prediction-model)
-      * [Air quality](#air-quality)
-      * [Availability of electric vehicle chargers](#availability-of-electric-vehicle-chargers)
-      * [Carbon footprint calculation](#carbon-footprint-calculation)
-      * [Car parking spots for PRM (People with Reduced Mobility)](#car-parking-spots-for-prm-people-with-reduced-mobility)
-      * [Bike parking spots for bikes](#bike-parking-spots-for-bikes)
-      * [Temperature](#temperature)
-      * [Precipitation in real time and precipitation prediction](#precipitation-in-real-time-and-precipitation-prediction)
-      * [Taxi pricing](#taxi-pricing)
-
 
 # Overview
 
+**ieMaps** is an **inclusive** and **eco-friendly** Google Maps implementation.
+It uses the [Google Maps API](https://cloud.google.com/maps-platform/) to
+perform all actions related to mobility. Google Maps is the quintessential web
+mapping service, but still, it does not care about the **environment** neither
+the **people with reduced mobility** (PWRM since now).
 
-**ieMaps** is an **inclusive** and **eco-friendly** Google Maps implementation. ~~And yes, we use GoogleMaps Api. But Waze does it and nobody cares~~. It takes in account several parameters such as:
+Knowing all the above, we decided to implement a third-party app that gives you
+a service like google maps but taking care of enviroment and people at the same
+time.
+We calculate the **footprint** of every trip shown in screen, so that the user
+knows what impact has for the planet to move around. We also calculate the **cost**
+of the trip, as well as the **air** **pollution** and **forecast prediction** of today and
+tomorrow.
+
+We care about people with reduced mobility. We take care of the **subway** **stations**
+that are not propperly equipped properly for them to move around the station. If
+the preffered transport mode is by car, we show the
+nearest reserved parking spot for reduced mobility people.
+
+By know, we take care of the following parameters in the city of **Barcelona**:
 
 * Air quality
 * Model that predicts the air quality of the following days
 * Availability of electric vehicle chargers
 * Carbon footprint calculation
-* ~~Cow air contamination for its backside~~
-* Car parking spots for PRM (People with Reduced Mobility)
-* Bike parking spots for bikes
-* Evaluation of the consumption of your vehicle  
+* Car parking spots for PWRM
+* Evaluation of the consumption of your vehicle
 * Temperature
 * Precipitation in real time and precipitation prediction
 * Closest bike parking spot close to destination
 * Price of taxis
 
+## Run the project
+----
 
-## Marketing stuff
+### Requeriments
+To run the implementation, make sure you have installed Docker Engine and Docker-compose.
 
-### Eco-friendly stuff
-We take care about the green stuff. Snoop Dogg does it too. We calculate the footprint of every trip shown in screen, so that the user knows how bad is for the planet to ~~move his ass~~ move around. We also calculate the money-money Puigdemoney of the trip, as well as the air pollution and weather of today, tomorrow, until 2050 when the world ends.
+If not, check the following instructions:
 
-### Inclusive stuff
-We also care about with Reduced Mobility: we take care of the subway stations that are not equipped properly for them to move around the station, we show the nearest reserved parking spot for Reduced Mobility People.
+#### Docker
 
-### Hippie stuff
-Finally, and Tesla Motors hasn't paid us for getting that feature, we calculate the benefits of using an electric vehicle for the transport. Anyway, and if you are Elon Musk, just tell that we are opened for new career oportunities and/or bribes.
+To install docker check official installation guide for [Windows](https://docs.docker.com/docker-for-windows/install/),
+[Mac](https://docs.docker.com/docker-for-mac/install/) or
+[Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
-All in all, and knowing that we live in a world with Expression Freedom, just say that, honestly, our project is waaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaay better than the others. Ask my grandmother.
+For **debian distros**, fastest way is probably install from apt using the following commands:
+
+Update software repositories
+```
+sudo apt-get update
+```
+
+Uninstall old versions of docker
+```
+sudo apt-get remove docker docker-engine docker.io
+```
+
+Install docker
+```
+sudo apt install docker.io
+```
+Start and automate docker. The Docker service needs to be setup to run at startup. To do so,type in each command followed by enter.
+```
+sudo systemctl start docker
+sudo systemctl enable docker
+```
+
+---
+**IMPORTANT**
+
+Make sure you don't need to type `sudo` every time you run docker. To do so, run the following command:
+
+```
+sudo usermod -aG docker $(whoami)
+
+```
+Reboot to apply this change.
+
+---
+
+#### docker-compose
 
 
-## Technical stuff
+For docker-compose, just run these commands:
+
+```source-shell
+sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose
+```
+
+### Running
+---
+
+#### Fast run (plug-and-play)
+In order to run the project in dockers, just run the `deploy.sh` bash script located in the
+root project folder.
+
+#### Run it locally
+Node server and Flask server can be runned locally by installing all the
+dependencies locally. 
+
+For run the **node (react)** server:
+- Make sure you have `npm` installed and run `npm
+install` in `/ieMaps_SAD/react/client-web` to install all needed dependencies.
+- Afterwards, run `npm start` in same directory in order ro run the server
+  listening in port `3000`
+
+For the **flask (python)** server:
+- Make sure you have `python3` and `pip` installed. Install all needed
+  dependencies by running `pip install requeriments.txt` in `ieMaps_SAD/app`
+  directory.
+
+- Afterwards run the server by running `python3 serverflask.py`. It will start flask server running on port `5000`.
+
+
+
+## How does it works?
+
+
+![MVC_diagram](/imga/MVC_diagram.png)
+
+
+### Server Code (Model)
+It consist of several python scripts that calculate the output parameters.
+Finally, `ieMaps.py` script merge all the information in a JSON file in order to
+be sent.
+
+### Flask (Controller)
+Flask is a micro web framework written in Python. It listens in port `5000` for
+a `POST` method. If the `POST` method is OK, it returns an `OK 200` HTTP
+response plus the JSON response prepared by the model.
+
+### React (View)
+React is a JavaScript library for building user interfaces. Is the responsible
+of creating the **input form** and sending it to the Flask API. Then it waits to
+the JSON response and prints the information from the JSON in a map and in the screen.
+
+## Parameters calulation
+
 
 ### Forecast prediction model
 We have used a **'Exponential smoothing state space model'** that predicts the weather for the following days.
