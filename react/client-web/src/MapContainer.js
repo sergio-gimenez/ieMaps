@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-
+import IconElectricVehicle from './imgs/electric-station.png'
+import Accessible from './imgs/accessible.png'
 
 const mapStyles = {
     width: '100%',
@@ -27,15 +28,25 @@ export class MapContainer extends Component {
             >
                 <Marker
                     onClick={this.onMarkerClick}
-                    name={'Current location 1'}
                     position={{ lat: this.props.startLat, lng: this.props.startLon }}
                     animation={this.props.google.maps.Animation.DROP}
                 />
                 <Marker
                     onClick={this.onMarkerClick}
-                    name={'Current location 2'}
                     position={{ lat: this.props.endLat, lng: this.props.endLon }}
                     animation={this.props.google.maps.Animation.DROP}
+                />
+                <Marker
+                    onClick={this.onMarkerClick}
+                    position={{ lat: this.props.closestCharging[0], lng: this.props.closestCharging[1] }}
+                    animation={this.props.google.maps.Animation.DROP}
+                    icon={IconElectricVehicle}
+                />
+                <Marker
+                    onClick={this.onMarkerClick}
+                    position={{ lat: this.props.closestParkingRMP[0], lng: this.props.closestParkingRMP[1] }}
+                    animation={this.props.google.maps.Animation.DROP}
+                    icon={Accessible}
                 />
             </Map>
 
