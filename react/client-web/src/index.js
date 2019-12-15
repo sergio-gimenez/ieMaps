@@ -4,15 +4,13 @@ import './css/index.css';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './Routes';
-import JSONparse from './JSONparse';
-import ViewSplit from './ViewSplit';
+// import ViewSplit from './ViewSplit';
 
 ReactDOM.render(
-    // <Router>
-    //     <Routes />
-    // </Router>,
-    // <JSONparse/>,
-    <ViewSplit/>,
+    <Router>
+        <Routes />
+    </Router>,
+    // <ViewSplit/>,
     document.getElementById('root'));
 
 
