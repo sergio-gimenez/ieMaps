@@ -29,9 +29,9 @@ class AjaxRequest extends React.Component {
                         start_lat: result.driving.start_lat,
                         start_lon: result.driving.start_lon,
                         end_lat: result.driving.end_lat,
-                        end_lon: result.driving.end_lon
+                        end_lon: result.driving.end_lon,
+                        result
                     });
-                    // this.props.history.push(`/view/`)
                 },
                 (error) => {
                     this.setState({
@@ -57,7 +57,7 @@ class AjaxRequest extends React.Component {
             );
         } else {
             return <View startLat={this.state.start_lat} startLon={this.state.start_lon}
-                endLat={this.state.end_lat} endLon={this.state.end_lon} />
+                endLat={this.state.end_lat} endLon={this.state.end_lon} result={this.state.result}/>
         }
     }
 }

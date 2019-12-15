@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import MapContainer from "./MapContainer";
 import "./css/ViewSplit.css";
-import response from "./response"
+// import data from "./response"
+import TabsView from "./Tabs";
 
-const driving = response.driving;
+// const driving = data.driving;
 
 class SplitScreen extends Component {
   render() {
     return (
-      <section class="container">
-        <div class="left-half">
-          {/* <MapContainer startLat={this.props.startLat} startLon={this.props.startLon}
-                endLat={this.props.endLat} endLon={this.props.endLon}/> */}
-          <MapContainer startLat={driving.start_lat} startLon={driving.start_lon}
-            endLat={driving.end_lat} endLon={driving.end_lon} />
+      <section className="container">
+        <div className="left-half">
+          <MapContainer startLat={this.props.startLat} startLon={this.props.startLon}
+                endLat={this.props.endLat} endLon={this.props.endLon}/>
+          {/* <MapContainer startLat={driving.start_lat} startLon={driving.start_lon}
+            endLat={driving.end_lat} endLon={driving.end_lon} /> */}
         </div>
-        <div class="right-half">
-          <h1>Right Half</h1>
-          <p>If your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
+        <div className="right-half">
+          <TabsView result={this.props.result}/>
+          {/* <TabsView response={data}/> */}
         </div>
       </section>
     );
