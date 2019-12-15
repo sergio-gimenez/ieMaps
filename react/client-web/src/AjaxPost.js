@@ -19,7 +19,7 @@ class AjaxRequest extends React.Component {
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
             }),
-            body: this.props.url.substring(8)
+            body: this.props.url
         })
             .then(res => res.json())
             .then(
@@ -57,7 +57,7 @@ class AjaxRequest extends React.Component {
             );
         } else {
             return <View startLat={this.state.start_lat} startLon={this.state.start_lon}
-                endLat={this.state.end_lat} endLon={this.state.end_lon} result={this.state.result}/>
+                endLat={this.state.end_lat} endLon={this.state.end_lon} result={this.state.result} />
         }
     }
 }
