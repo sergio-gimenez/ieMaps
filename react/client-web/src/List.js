@@ -25,7 +25,6 @@ function getKeys(data) {
 
 export default function SimpleList(props) {
     const classes = useStyles();
-    console.log(getKeys(props.data))
     return (
         <div className={classes.root}>
             <List >

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-
+import EvStationIcon from '@material-ui/icons/EvStation';
 
 const mapStyles = {
     width: '100%',
@@ -36,6 +36,18 @@ export class MapContainer extends Component {
                     name={'Current location 2'}
                     position={{ lat: this.props.endLat, lng: this.props.endLon }}
                     animation={this.props.google.maps.Animation.DROP}
+                />
+                <Marker
+                    onClick={this.onMarkerClick}
+                    name={'Charging Station'}
+                    position={{ lat: this.props.closestCharging[0], lng: this.props.closestCharging[1] }}
+                    animation={this.props.google.maps.Animation.DROP}
+                    // icon={{
+                    //     url: "@material-ui/icons/EvStation",
+                    //     anchor: new this.props.google.maps.Point(32,32),
+                    //     scaledSize: new this.props.google.maps.Size(64,64)
+                    //   }}
+                    // icon={EvStationIcon}
                 />
             </Map>
 

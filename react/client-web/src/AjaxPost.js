@@ -30,6 +30,7 @@ class AjaxRequest extends React.Component {
                         start_lon: result.driving.start_lon,
                         end_lat: result.driving.end_lat,
                         end_lon: result.driving.end_lon,
+                        closes_charging_station: result.driving.closes_charging_station,
                         result
                     });
                 },
@@ -56,8 +57,13 @@ class AjaxRequest extends React.Component {
                 </div>
             );
         } else {
-            return <View startLat={this.state.start_lat} startLon={this.state.start_lon}
-                endLat={this.state.end_lat} endLon={this.state.end_lon} result={this.state.result}/>
+            return <View 
+            startLat={this.state.start_lat} 
+            startLon={this.state.start_lon}
+            endLat={this.state.end_lat} 
+            endLon={this.state.end_lon}
+            closestCharging={this.state.closes_charging_station} 
+            result={this.state.result}/>
         }
     }
 }
