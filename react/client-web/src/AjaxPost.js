@@ -1,5 +1,4 @@
 import React from 'react';
-import './css/App.css';
 import logo from './imgs/icon.png';
 import Grid from '@material-ui/core/Grid';
 import View from './ViewSplit';
@@ -53,7 +52,7 @@ class AjaxRequest extends React.Component {
                 <div>
                     <Grid container justify="center" direction="column" alignItems="center">
                         <img src={logo} className="App-logo" alt="logo" />
-                        Loading...
+                        <div>Loading...</div>
                     </Grid>
                 </div>
             );

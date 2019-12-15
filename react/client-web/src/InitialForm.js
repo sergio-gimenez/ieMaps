@@ -65,7 +65,7 @@ function InitialForm() {
 
     <div className="InitialForm">
       <header className="InitialForm-header">
-        <Grid container justify="center" direction="column" alignItems="center">
+        <Grid container justify="flex-start" direction="column" alignItems="center">
           <img src={logo} className="App-logo" alt="logo" />
           <TextField
             label="From"
