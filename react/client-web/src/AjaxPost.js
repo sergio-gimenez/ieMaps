@@ -12,14 +12,14 @@ class AjaxRequest extends React.Component {
             isLoaded: false,
         };
     }
-
     componentDidMount() {
+        console.log(this.props.url.substring(8).replace(/ /g,"%20"))
         fetch("http://localhost:5000", {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
             }),
-            body: this.props.url.substring(8)
+            body: this.props.url.substring(8).replace(/ /g,"%20")
         })
             .then(res => res.json())
             .then(
