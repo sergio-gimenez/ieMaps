@@ -29,10 +29,11 @@ class AjaxRequest extends React.Component {
                         start_lon: result.driving.start_lon,
                         end_lat: result.driving.end_lat,
                         end_lon: result.driving.end_lon,
-                        closes_charging_station: result.driving.closes_charging_station,
-                        closes_parking_for_PRM: result.driving.closes_parking_for_PRM,
                         start_description: result.driving.start_description,
                         end_description: result.driving.end_description,
+                        closes_charging_station: result.driving.closes_charging_station,
+                        closes_parking_for_PRM: result.driving.closes_parking_for_PRM,
+                        closes_parking_for_bike: result.bicycling.closes_parking_for_bike,
                         result
                     });
                 },
@@ -64,11 +65,13 @@ class AjaxRequest extends React.Component {
                 startLon={this.state.start_lon}
                 endLat={this.state.end_lat}
                 endLon={this.state.end_lon}
-                closestCharging={this.state.closes_charging_station}
-                closestParkingRMP={this.state.closes_parking_for_PRM}
                 startDescription={this.state.start_description}
                 endDescription={this.state.end_description}
-                result={this.state.result} />
+                result={this.state.result} 
+                closestCharging={this.state.closes_charging_station}
+                closestParkingRMP={this.state.closes_parking_for_PRM}
+                closestParkingBike={this.state.closes_parking_for_bike}
+            />
         }
     }
 }
