@@ -20,6 +20,7 @@ class SplitScreen extends Component {
             endDescription={this.props.startDescription} 
             closestCharging={this.props.closestCharging} 
             closestParkingRMP={this.props.closestParkingRMP}
+            closestParkingBike={this.props.closestParkingBike}
           />
           {/* <MapContainer startLat={driving.start_lat} startLon={driving.start_lon}
             endLat={driving.end_lat} endLon={driving.end_lon} closestCharging={driving.closes_charging_station} /> */}
