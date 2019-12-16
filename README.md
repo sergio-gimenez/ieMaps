@@ -3,8 +3,8 @@
 This project started in October 2019 in the [**Hackaton UPC
 2019**](https://hackupc.com/)  [(Initial devpost
 submission :))](https://devpost.com/software/hackupc2019-7bxfj0). It has also
-being part the final project for
-**Software and Distributed Applications** course of the Polythecnical University of
+being part of final project for
+**Software and Distributed Applications** course of the Telecommunications Engineering Bachelor at the Polythecnical University of
 Catalonia (UPC).  
 
 ### Contributors
