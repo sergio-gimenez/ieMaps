@@ -7,38 +7,12 @@ body {
   line-height: 150%;
 }
 
-/* section {
-  text-align: center;
-} */
-
-div {
-  height: 100%;
-}
-
-/* article {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  padding: 20px;
-} */
-
-/* h1 {
-  font-size: 1.75rem;
-  margin: 0 0 0.75rem 0;
-} */
-
-/* .container {
-  display: table;
-  width: 100%;
-} */
-
 .left-half {
   background-color: whitesmoke;
   position: absolute;
   left: 0px;
   width: 50%;
+  height: 100%;
 }
 
 .right-half {
@@ -46,4 +20,5 @@ div {
   position: absolute;
   right: 0px;
   width: 50%;
+  height: 100%;
 }
