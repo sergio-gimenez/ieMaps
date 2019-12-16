@@ -153,7 +153,7 @@ For the **flask (python)** server:
 
 
 
-# How does it works?
+# How does it work?
 
 
 ![MVC_diagram](/img/MVC_diagram.png)
