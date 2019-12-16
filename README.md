@@ -132,6 +132,8 @@ sudo chmod +x /usr/bin/docker-compose
 In order to run the project in dockers, just run the `deploy.sh` bash script located in the
 root project folder.
 
+![MVC_diagram_docker](/img/MVC_diagram_docker.png)
+
 ### Run it locally
 Node server and Flask server can be runned locally by installing all the
 dependencies locally. 
