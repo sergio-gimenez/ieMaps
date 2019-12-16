@@ -15,6 +15,22 @@ export class MapContainer extends Component {
         selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
     };
 
+    onMarkerClick = (props, marker, e) =>
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
+
     render() {
         return (
             <Map
@@ -30,24 +46,37 @@ export class MapContainer extends Component {
                     onClick={this.onMarkerClick}
                     position={{ lat: this.props.startLat, lng: this.props.startLon }}
                     animation={this.props.google.maps.Animation.DROP}
+                    name={this.props.endDescription}
                 />
                 <Marker
                     onClick={this.onMarkerClick}
                     position={{ lat: this.props.endLat, lng: this.props.endLon }}
                     animation={this.props.google.maps.Animation.DROP}
+                    name={this.props.startDescription}
                 />
                 <Marker
                     onClick={this.onMarkerClick}
                     position={{ lat: this.props.closestCharging[0], lng: this.props.closestCharging[1] }}
                     animation={this.props.google.maps.Animation.DROP}
                     icon={IconElectricVehicle}
+                    name={'Electric Vehicle Charging Station'}
                 />
                 <Marker
                     onClick={this.onMarkerClick}
                     position={{ lat: this.props.closestParkingRMP[0], lng: this.props.closestParkingRMP[1] }}
                     animation={this.props.google.maps.Animation.DROP}
                     icon={Accessible}
+                    name={'Parking for PWRM'}
                 />
+                <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}
+                    onClose={this.onClose}
+                >
+                    <div>
+                        <h4>{this.state.selectedPlace.name}</h4>
+                    </div>
+                </InfoWindow>
             </Map>
 
         );
