@@ -13,10 +13,7 @@ from tools.closestStation import getClosestSation
 from tools.getStationsNoAdapted import isLineAdapted
 import os
 
-# Bru's key
-#gmaps = googlemaps.Client(key='AIzaSyD9R2jg0AERETo2MTHyEHqQTLS06hc7sM0')
-# Xexa's key
-gmaps = googlemaps.Client(key='AIzaSyA85AZn35eZa6DwMyLhXQfSxM8nP3HB-nA')
+gmaps = googlemaps.Client(key='PUT YOUR KEY HERE')
 
 
 def ieMaps(json_i):

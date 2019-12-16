@@ -1,21 +1,37 @@
 # ieMaps: an inclusive eco-friendly app for mobility
 
+This project started in October 2019 in the [**Hackaton UPC
+2019**](https://hackupc.com/)  [(Initial devpost
+submission :))](https://devpost.com/software/hackupc2019-7bxfj0). It has also
+being part the final project for
+**Software and Distributed Applications** course of the Polythecnical University of
+Catalonia (UPC).  
+
+### Contributors
+- Sergio Giménez ([@sergio-gimenez](https://github.com/sergio-gimenez))
+- Martí Riera ([@martiriera](https://github.com/martiriera))
+- Benedetto Grillone ([@Begri](https://github.com/Begri))
+- Laura Lax ([@LauLax](https://github.com/LauLax))
+- Bruno Ibáñez ([@brunoibez](https://github.com/brunoibez))
+
 ![/img/ieMaps.png](/img/iemaps.png)
 
 
 # Table of contents
 
 - [ieMaps: an inclusive eco-friendly app for mobility](#iemaps-an-inclusive-eco-friendly-app-for-mobility)
+    - [Contributors](#contributors)
 - [Table of contents](#table-of-contents)
 - [Overview](#overview)
 - [Run the project](#run-the-project)
   - [Requeriments](#requeriments)
+    - [Google Maps API Key](#google-maps-api-key)
     - [Docker](#docker)
     - [docker-compose](#docker-compose)
   - [Running](#running)
     - [Fast run (plug-and-play)](#fast-run-plug-and-play)
     - [Run it locally](#run-it-locally)
-- [How does it works?](#how-does-it-works)
+- [How does it work?](#how-does-it-work)
     - [Server Code (Model)](#server-code-model)
     - [Flask (Controller)](#flask-controller)
     - [React (View)](#react-view)
@@ -29,7 +45,6 @@
   - [Temperature](#temperature)
   - [Precipitation in real time and precipitation prediction](#precipitation-in-real-time-and-precipitation-prediction)
   - [Taxi pricing](#taxi-pricing)
-
 
 
 # Overview
@@ -70,6 +85,10 @@ By know, we take care of the following parameters in the city of **Barcelona**:
 
 
 ## Requeriments
+
+### Google Maps API Key
+Make sure you have a Google Maps API Key. To get it, go to the Google maps API page, sign-up and get a token to use. You must enter a credit card number to receive your token. However, Google claims they will not charge your account without you personally upgrading your service. Proceed at your own discretion.
+
 To run the implementation, make sure you have installed Docker Engine and Docker-compose.
 
 If not, check the following instructions:
@@ -130,7 +149,8 @@ sudo chmod +x /usr/bin/docker-compose
 
 ### Fast run (plug-and-play)
 In order to run the project in dockers, just run the `deploy.sh` bash script located in the
-root project folder.
+root project folder. It will build and run two docker instances: `ieMaps_react`
+and `ieMaps_flask`.
 
 ![MVC_diagram_docker](/img/MVC_diagram_docker.png)
 
@@ -150,7 +170,6 @@ For the **flask (python)** server:
   directory.
 
 - Afterwards run the server by running `python3 serverflask.py`. It will start flask server running on port `5000`.
-
 
 
 # How does it work?
