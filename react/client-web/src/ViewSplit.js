@@ -15,7 +15,9 @@ class SplitScreen extends Component {
             startLat={this.props.startLat} 
             startLon={this.props.startLon}
             endLat={this.props.endLat} 
-            endLon={this.props.endLon} 
+            endLon={this.props.endLon}
+            startDescription={this.props.endDescription}
+            endDescription={this.props.startDescription} 
             closestCharging={this.props.closestCharging} 
             closestParkingRMP={this.props.closestParkingRMP}
           />

@@ -31,6 +31,8 @@ class AjaxRequest extends React.Component {
                         end_lon: result.driving.end_lon,
                         closes_charging_station: result.driving.closes_charging_station,
                         closes_parking_for_PRM: result.driving.closes_parking_for_PRM,
+                        start_description: result.driving.start_description,
+                        end_description: result.driving.end_description,
                         result
                     });
                 },
@@ -64,6 +66,8 @@ class AjaxRequest extends React.Component {
                 endLon={this.state.end_lon}
                 closestCharging={this.state.closes_charging_station}
                 closestParkingRMP={this.state.closes_parking_for_PRM}
+                startDescription={this.state.start_description}
+                endDescription={this.state.end_description}
                 result={this.state.result} />
         }
     }
