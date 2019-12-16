@@ -4,8 +4,12 @@
 }
 body {
   font-size: 1.25rem;
-  line-height: 150%;
+  line-height: 100%;
 }
+
+/* div {
+  height: 100%;
+} */
 
 .left-half {
   background-color: whitesmoke;
@@ -20,5 +24,4 @@ body {
   position: absolute;
   right: 0px;
   width: 50%;
-  height: 100%;
 }
