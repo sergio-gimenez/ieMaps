@@ -9,9 +9,6 @@ ENV PATH /react/node_modules/.bin:$PATH
 
 COPY react/* /react/
 
-RUN mkdir -p /react/public
-RUN touch /react/public/index.html
-
 RUN npm install --silent
 
 # start app
